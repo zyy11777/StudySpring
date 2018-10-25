@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
-	<!-- 将user对象交给spring容器管理 -->
-	<bean name="user" class="day01.bean.User"></bean>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://www.springframework.org/schema/beans" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
+	<!-- 将user对象交给spring容器管理 
+		<bean> 配置需要创建的对象
+			id:用于之后从spring容器获得实例时使用
+			class：需要创建的全限定类名
+	
+	<bean id="user" class="ioc.UserServiceImpl"></bean> -->
+	
+	<!-- 
+		模拟spring执行过程
+			创建service实例：BookService bookService = new BookServiceImpl()	IoC  <bean>
+			创建dao实例：BookDao bookDao = new BookDaoImpl()			IoC
+			将dao设置给service：bookService.setBookDao(bookDao);		DI   <property>
+			
+			<property> 用于进行属性注入
+				name： bean的属性名，通过setter方法获得
+					setBookDao 得到  BookDao  得到  bookDao
+				ref ：另一个bean的id值的引用
+	 -->
+	<!-- 创建service -->
+	<bean id="userService" class="di.UserServiceImpl">
+		<!-- property name只能是小写或者第一个字母大写？？？-->
+		 <property name="Userdao" ref="userDao"></property> 
+	</bean>
+	
+	<!-- 创建dao实例 -->
+	<bean id="userDao" class="di.UserDaoImpl"></bean>
 </beans>
