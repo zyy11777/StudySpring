@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:p="http://www.springframework.org/schema/p" 
 		xsi:schemaLocation="http://www.springframework.org/schema/beans 
 							http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
 	<!-- 将user对象交给spring容器管理 
@@ -23,10 +24,23 @@
 	 -->
 	<!-- 创建service -->
 	<bean id="userService" class="di.UserServiceImpl">
-		<!-- property name只能是小写或者第一个字母大写？？？-->
-		 <property name="Userdao" ref="userDao"></property> 
+		<!-- property name bean属性的名字-->
+		 <property name="userDao" ref="userDao"></property> 
 	</bean>
 	
 	<!-- 创建dao实例 -->
 	<bean id="userDao" class="di.UserDaoImpl"></bean>
+	
+	<!-- 创建service -->
+	<bean id="StudentService" class="di.StudentService">
+		<!-- property name现在是第一个字母大写和studentDao这样才行？？？-->
+		 <property name="studentDao" ref="StudentDao"></property> 
+	</bean>
+	
+	<!-- 创建dao实例 -->
+	<bean id="StudentDao" class="di.StudentDao"></bean>
+	
+	<!-- p命名空间  简化property的写法，直接注入属性 -->
+	<bean id="p" class="di.StudentService" p:sasa="">
+	</bean>
 </beans>
