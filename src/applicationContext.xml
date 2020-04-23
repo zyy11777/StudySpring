@@ -9,7 +9,9 @@
 			id:用于之后从spring容器获得实例时使用
 			class：需要创建的全限定类名 -->
 	
-	<bean id="user" class="ioc.UserServiceImpl"></bean>
+	<bean id="user" class="day01.bean.User">
+		<property name="name" value="1111"></property>
+	</bean>
 	
 	<!-- 
 		模拟spring执行过程
